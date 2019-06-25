@@ -2,6 +2,7 @@ const express = require('express');
 const helmet = require('helmet');
 
 const usersRouter = require('../users/users-router');
+const todosRouter = require('../todos/todos-router');
 
 const server = express();
 
@@ -13,5 +14,6 @@ server.get('/', (req, res) => {
 });
 
 server.use('/api/users', usersRouter);
+server.use('/api/todos', todosRouter);
 
 module.exports = server;
