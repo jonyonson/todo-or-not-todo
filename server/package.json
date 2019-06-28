@@ -1,7 +1,7 @@
 {
-  "name": "todo-backend",
+  "name": "todo-or-not-todo",
   "version": "1.0.0",
-  "description": "backend for a todo app",
+  "description": "todo app",
   "private": true,
   "main": "index.js",
   "scripts": {
