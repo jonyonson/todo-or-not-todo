@@ -1,3 +1,3 @@
-# TO DO OR NOT TO DO
+# To do, or not to do
 
-## Under Development
+## WIP
