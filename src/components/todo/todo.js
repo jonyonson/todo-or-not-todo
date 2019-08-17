@@ -15,7 +15,8 @@ function Todo() {
     );
   };
 
-  const removeTodo = id => setTodos(todos => todos.filter(t => t.id !== id));
+  const removeTodo = id =>
+    setTodos(todos => todos.filter(todo => todo.id !== id));
 
   return (
     <>
