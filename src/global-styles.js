@@ -6,12 +6,9 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 
-  * + * {
-    margin-top: 1rem;
-  }
-
   html,
   body {
+    height: 100%;
     margin: 0;
     color: #333;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
@@ -32,6 +29,10 @@ const GlobalStyle = createGlobalStyle`
   h5 + *,
   h6 + * {
     margin-top: 0.5rem;
+  }
+
+  #root {
+    height: 100%;
   }
 `;
 
