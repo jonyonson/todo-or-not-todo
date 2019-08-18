@@ -1,14 +1,19 @@
 import React from 'react';
+import styled from 'styled-components';
 import Todo from './todo';
 import GlobalStyles from '../global-styles';
 
 function App() {
   return (
-    <div className="App">
+    <AppWrapper id="app-wrapper">
       <Todo />
       <GlobalStyles />
-    </div>
+    </AppWrapper>
   );
 }
 
 export default App;
+
+const AppWrapper = styled.div`
+  height: 100%;
+`;
