@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import generateId from '../../helpers/generate-id';
-import './todo.css';
+import generateId from '../helpers/generate-id';
 
 function Todo() {
   const [todos, setTodos] = useState([]);
@@ -11,7 +10,7 @@ function Todo() {
       todos.concat({
         text: input,
         id: generateId(),
-      })
+      }),
     );
   };
 

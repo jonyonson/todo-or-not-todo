@@ -1,6 +1,6 @@
 import React from 'react';
-import Todo from '../todo';
-import GlobalStyles from '../../global-styles';
+import Todo from './todo';
+import GlobalStyles from '../global-styles';
 
 function App() {
   return (
