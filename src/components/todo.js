@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 import generateId from '../helpers/generate-id';
 
 function Todo() {
@@ -22,6 +23,10 @@ function Todo() {
 
   return (
     <Wrapper>
+      <Header>
+        <h2>Today</h2>
+        <span>{moment().format('dddd, MMMM D')}</span>
+      </Header>
       <Form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -29,17 +34,19 @@ function Todo() {
           placeholder="New Todo"
           onChange={e => setInput(e.target.value)}
         />
-        <button type="sumbit">Submit</button>
+        <button type="sumbit" disabled={!input.length}>
+          Submit
+        </button>
       </Form>
 
-      <TodosList>
+      <TodoList>
         {todos.map(({ text, id }) => (
           <li key={id}>
             <span>{text}</span>
             <button onClick={() => removeTodo(id)}>REMOVE</button>
           </li>
         ))}
-      </TodosList>
+      </TodoList>
     </Wrapper>
   );
 }
@@ -51,10 +58,20 @@ const Wrapper = styled.div`
   width: 500px;
   margin: 0 auto;
   border: 1px solid black;
+  padding: 30px;
+`;
+
+const Header = styled.div`
+  margin-bottom: 30px;
+  border-bottom: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: rgba(0, 0, 0, 0.6);
+  padding-bottom: 5px;
 `;
 
 const Form = styled.form`
-  padding: 30px;
   display: flex;
 
   input {
@@ -75,13 +92,16 @@ const Form = styled.form`
   }
 `;
 
-const TodosList = styled.ul`
+const TodoList = styled.ul`
   list-style-type: none;
-  padding: 30px;
+  padding-left: 0;
+  padding-top: 30px;
 
   li {
     display: flex;
     border: 1px solid black;
+    padding: 10px;
+    margin-bottom: 20px;
 
     span {
       flex: 1;
