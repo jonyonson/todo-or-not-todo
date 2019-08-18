@@ -1,11 +1,12 @@
 import React from 'react';
 import Todo from '../todo';
-import './App.css';
+import GlobalStyles from '../../global-styles';
 
 function App() {
   return (
     <div className="App">
       <Todo />
+      <GlobalStyles />
     </div>
   );
 }
