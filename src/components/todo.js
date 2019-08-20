@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import generateId from '../helpers/generate-id';
+import { FiTrash2 as Trash } from 'react-icons/fi';
 
 function Todo() {
   const initialTodos = () =>
@@ -50,7 +51,8 @@ function Todo() {
         {todos.map(({ text, id }) => (
           <li key={id}>
             <span>{text}</span>
-            <button onClick={() => removeTodo(id)}>REMOVE</button>
+            <TrashIcon onClick={() => removeTodo(id)} />
+            {/* <button onClick={() => removeTodo(id)}>REMOVE</button> */}
           </li>
         ))}
       </TodoList>
@@ -113,5 +115,15 @@ const TodoList = styled.ul`
     span {
       flex: 1;
     }
+  }
+`;
+
+const TrashIcon = styled(Trash)`
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    transition: all 0.2s ease;
   }
 `;
