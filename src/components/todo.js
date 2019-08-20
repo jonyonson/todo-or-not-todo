@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import generateId from '../helpers/generate-id';
 
 function Todo() {
-  const [todos, setTodos] = useState([]);
+  const initialTodos = () =>
+    JSON.parse(window.localStorage.getItem('todos')) || [];
+
+  const [todos, setTodos] = useState(initialTodos);
   const [input, setInput] = useState('');
+
+  useEffect(() => {
+    window.localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -35,7 +42,7 @@ function Todo() {
           onChange={e => setInput(e.target.value)}
         />
         <button type="sumbit" disabled={!input.length}>
-          Submit
+          Add Task
         </button>
       </Form>
 
