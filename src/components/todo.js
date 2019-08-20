@@ -2,14 +2,32 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import generateId from '../helpers/generate-id';
+import formatDate from '../helpers/format-date';
+import DatePicker from 'react-datepicker';
 import { FiTrash2 as Trash } from 'react-icons/fi';
+import 'react-datepicker/dist/react-datepicker.css';
+
+// Must be a class component
+// https://github.com/Hacker0x01/react-datepicker/issues/862
+class DateButton extends React.Component {
+  render() {
+    const Button = styled.button`
+      font-size: 14px;
+      height: 30px;
+      margin-top: 10px;
+    `;
+    return <Button onClick={this.props.onClick}>{this.props.value}</Button>;
+  }
+}
 
 function Todo() {
+  const initialDate = () => new Date();
   const initialTodos = () =>
     JSON.parse(window.localStorage.getItem('todos')) || [];
 
   const [todos, setTodos] = useState(initialTodos);
   const [input, setInput] = useState('');
+  const [dueDate, setDueDate] = useState(initialDate);
 
   useEffect(() => {
     window.localStorage.setItem('todos', JSON.stringify(todos));
@@ -21,18 +39,24 @@ function Todo() {
       todos.concat({
         text: input,
         id: generateId(),
+        date: formatDate(dueDate),
       }),
     );
     setInput('');
+    setDueDate(() => new Date());
   };
 
   const removeTodo = id =>
     setTodos(todos => todos.filter(todo => todo.id !== id));
 
+  const handleDateChange = date => {
+    setDueDate(date);
+  };
+
   return (
     <Wrapper>
       <Header>
-        <h2>Today</h2>
+        <h2>Inbox</h2>
         <span>{moment().format('dddd, MMMM D')}</span>
       </Header>
       <Form onSubmit={handleSubmit}>
@@ -46,14 +70,21 @@ function Todo() {
           Add Task
         </button>
       </Form>
+      <DatePicker
+        customInput={<DateButton />}
+        selected={dueDate}
+        minDate={new Date()}
+        onChange={handleDateChange}
+        dateFormat="MMMM d"
+      />
 
       <TodoList>
-        {todos.map(({ text, id }) => (
-          <li key={id}>
+        {todos.map(({ text, id, date }) => (
+          <Item key={id}>
             <span>{text}</span>
             <TrashIcon onClick={() => removeTodo(id)} />
-            {/* <button onClick={() => removeTodo(id)}>REMOVE</button> */}
-          </li>
+            <div>{date}</div>
+          </Item>
         ))}
       </TodoList>
     </Wrapper>
@@ -105,25 +136,37 @@ const TodoList = styled.ul`
   list-style-type: none;
   padding-left: 0;
   padding-top: 30px;
+`;
 
-  li {
-    display: flex;
-    border: 1px solid black;
-    padding: 10px;
-    margin-bottom: 20px;
+const Item = styled.li`
+  display: flex;
+  border: 1px solid black;
+  padding: 10px;
+  margin-bottom: 20px;
+  align-items: center;
 
-    span {
-      flex: 1;
-    }
+  span {
+    flex: 1;
+  }
+
+  div {
+    text-align: right;
+    width: 90px;
+    font-size: 12px;
   }
 `;
 
 const TrashIcon = styled(Trash)`
   cursor: pointer;
   transition: all 0.2s ease;
+  display: none;
 
   &:hover {
     transform: scale(1.1);
     transition: all 0.2s ease;
+  }
+
+  ${Item}:hover & {
+    display: block;
   }
 `;
