@@ -39,7 +39,7 @@ function Todo() {
       todos.concat({
         text: input,
         id: generateId(),
-        date: formatDate(dueDate),
+        date: moment(dueDate).toString(),
       }),
     );
     setInput('');
@@ -79,13 +79,15 @@ function Todo() {
       />
 
       <TodoList>
-        {todos.map(({ text, id, date }) => (
-          <Item key={id}>
-            <span>{text}</span>
-            <TrashIcon onClick={() => removeTodo(id)} />
-            <div>{date}</div>
-          </Item>
-        ))}
+        {todos.map(({ text, id, date }) => {
+          return (
+            <Item key={id}>
+              <span>{text}</span>
+              <TrashIcon onClick={() => removeTodo(id)} />
+              <div>{formatDate(date)}</div>
+            </Item>
+          );
+        })}
       </TodoList>
     </Wrapper>
   );
