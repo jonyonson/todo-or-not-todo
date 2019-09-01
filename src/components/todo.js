@@ -4,21 +4,9 @@ import moment from 'moment';
 import generateId from '../helpers/generate-id';
 import formatDate from '../helpers/format-date';
 import DatePicker from 'react-datepicker';
+import DateButton from './date-button.js';
 import { FiTrash2 as Trash } from 'react-icons/fi';
 import 'react-datepicker/dist/react-datepicker.css';
-
-// Must be a class component
-// https://github.com/Hacker0x01/react-datepicker/issues/862
-class DateButton extends React.Component {
-  render() {
-    const Button = styled.button`
-      font-size: 14px;
-      height: 30px;
-      margin-top: 10px;
-    `;
-    return <Button onClick={this.props.onClick}>{this.props.value}</Button>;
-  }
-}
 
 function Todo() {
   const initialDate = () => new Date();
@@ -49,9 +37,7 @@ function Todo() {
   const removeTodo = id =>
     setTodos(todos => todos.filter(todo => todo.id !== id));
 
-  const handleDateChange = date => {
-    setDueDate(date);
-  };
+  const handleDateChange = date => setDueDate(date);
 
   return (
     <Wrapper>
@@ -70,6 +56,7 @@ function Todo() {
           Add Task
         </button>
       </Form>
+
       <DatePicker
         customInput={<DateButton />}
         selected={dueDate}
