@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import generateId from '../helpers/generate-id';
-import formatDate from '../helpers/format-date';
+// import formatDate from '../helpers/format-date';
 import DatePicker from 'react-datepicker';
 import DateButton from './date-button.js';
-import { FiTrash2 as Trash } from 'react-icons/fi';
+// import { FiTrash2 as Trash } from 'react-icons/fi';
 import 'react-datepicker/dist/react-datepicker.css';
+import TodoList from './todo-list';
 
 function Todo() {
   const initialDate = () => new Date();
@@ -16,6 +17,7 @@ function Todo() {
   const [todos, setTodos] = useState(initialTodos);
   const [input, setInput] = useState('');
   const [dueDate, setDueDate] = useState(initialDate);
+  const [filter, setFilter] = useState('all');
 
   useEffect(() => {
     window.localStorage.setItem('todos', JSON.stringify(todos));
@@ -39,10 +41,27 @@ function Todo() {
 
   const handleDateChange = date => setDueDate(date);
 
+  const getCount = filter => {
+    if (filter === 'all') {
+      return todos.length;
+    } else if (filter === 'today') {
+      return todos.filter(x => moment().isSame(x.date, 'day')).length;
+    } else if (filter === 'week') {
+      return todos.filter(x =>
+        moment(x.date).isSameOrBefore(moment().add(6, 'd'), 'day'),
+      ).length;
+    }
+  };
+
+  let title;
+  if (filter === 'all') title = 'Inbox';
+  else if (filter === 'today') title = 'Today';
+  else if (filter === 'week') title = 'Next 7 Days';
+
   return (
     <Wrapper>
       <Header>
-        <h2>Inbox</h2>
+        <h2>{title}</h2>
         <span>{moment().format('dddd, MMMM D')}</span>
       </Header>
       <Form onSubmit={handleSubmit}>
@@ -56,7 +75,6 @@ function Todo() {
           Add Task
         </button>
       </Form>
-
       <DatePicker
         customInput={<DateButton />}
         selected={dueDate}
@@ -64,18 +82,21 @@ function Todo() {
         onChange={handleDateChange}
         dateFormat="MMMM d"
       />
+      <br />
 
-      <TodoList>
-        {todos.map(({ text, id, date }) => {
-          return (
-            <Item key={id}>
-              <span>{text}</span>
-              <TrashIcon onClick={() => removeTodo(id)} />
-              <div>{formatDate(date)}</div>
-            </Item>
-          );
-        })}
-      </TodoList>
+      <TabNav>
+        <button onClick={() => setFilter('all')}>
+          Inbox <span>{getCount('all')}</span>
+        </button>
+        <button onClick={() => setFilter('today')}>
+          Today <span>{getCount('today')}</span>
+        </button>
+        <button onClick={() => setFilter('week')}>
+          Next 7 Days <span>{getCount('week')}</span>
+        </button>
+      </TabNav>
+
+      <TodoList todos={todos} removeTodo={removeTodo} filterBy={filter} />
     </Wrapper>
   );
 }
@@ -121,41 +142,24 @@ const Form = styled.form`
   }
 `;
 
-const TodoList = styled.ul`
-  list-style-type: none;
-  padding-left: 0;
-  padding-top: 30px;
-`;
-
-const Item = styled.li`
+const TabNav = styled.div`
   display: flex;
-  border: 1px solid black;
-  padding: 10px;
-  margin-bottom: 20px;
-  align-items: center;
+  margin-top: 30px;
+  border-bottom: 1px solid black;
 
-  span {
-    flex: 1;
-  }
+  button {
+    font-size: 14px;
+    height: 30px;
+    padding: 0 15px 0 5px;
+    /* border: 1px solid black; */
+    /* border-bottom: none; */
+    border: none;
+    outline: none;
 
-  div {
-    text-align: right;
-    width: 90px;
-    font-size: 12px;
-  }
-`;
-
-const TrashIcon = styled(Trash)`
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: none;
-
-  &:hover {
-    transform: scale(1.1);
-    transition: all 0.2s ease;
-  }
-
-  ${Item}:hover & {
-    display: block;
+    span {
+      font-size: 80%;
+      color: rgba(0, 0, 0, 0.4);
+      margin-left: 5px;
+    }
   }
 `;
