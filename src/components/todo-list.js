@@ -3,17 +3,21 @@ import styled from 'styled-components';
 import formatDate from '../helpers/format-date';
 import moment from 'moment';
 import { FiTrash2 as Trash } from 'react-icons/fi';
+import complete from '../assets/complete.svg';
 
 function TodoList(props) {
-  let todos;
+  let todos, message;
   if (props.filterBy === 'all') {
     todos = props.todos;
+    message = 'All Clear!';
   } else if (props.filterBy === 'today') {
     todos = props.todos.filter(x => moment().isSame(x.date, 'day'));
+    message = "You're all done for the day!";
   } else if (props.filterBy === 'week') {
     todos = props.todos.filter(x =>
       moment(x.date).isSameOrBefore(moment().add(6, 'd'), 'day'),
     );
+    message = "You're all done for the week!";
   }
 
   return (
@@ -27,6 +31,13 @@ function TodoList(props) {
           </Item>
         );
       })}
+
+      {!todos.length && (
+        <ImageWrapper>
+          <img src={complete} alt="" />
+          <span>{message}</span>
+        </ImageWrapper>
+      )}
     </List>
   );
 }
@@ -69,5 +80,17 @@ const TrashIcon = styled(Trash)`
 
   ${Item}:hover & {
     display: block;
+  }
+`;
+
+const ImageWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    width: 60%;
+    margin-bottom: 15px;
   }
 `;

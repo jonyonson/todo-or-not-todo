@@ -2,12 +2,10 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import generateId from '../helpers/generate-id';
-// import formatDate from '../helpers/format-date';
 import DatePicker from 'react-datepicker';
 import DateButton from './date-button.js';
-// import { FiTrash2 as Trash } from 'react-icons/fi';
-import 'react-datepicker/dist/react-datepicker.css';
 import TodoList from './todo-list';
+import 'react-datepicker/dist/react-datepicker.css';
 
 function Todo() {
   const initialDate = () => new Date();
@@ -163,3 +161,15 @@ const TabNav = styled.div`
     }
   }
 `;
+
+// const ImageWrapper = styled.div`
+//   width: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+
+//   img {
+//     width: 60%;
+//     margin-bottom: 15px;
+//   }
+// `;
