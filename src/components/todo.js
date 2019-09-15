@@ -111,6 +111,7 @@ const Wrapper = styled.div`
   margin: 0 auto;
   border: 1px solid black;
   padding: 30px;
+  min-height: 630px;
 `;
 
 const Header = styled.div`
