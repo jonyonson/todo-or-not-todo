@@ -52,9 +52,13 @@ function Todo() {
   };
 
   let title;
-  if (filter === 'all') title = 'Inbox';
-  else if (filter === 'today') title = 'Today';
-  else if (filter === 'week') title = 'Next 7 Days';
+  if (filter === 'all') {
+    title = 'Inbox';
+  } else if (filter === 'today') {
+    title = 'Today';
+  } else if (filter === 'week') {
+    title = 'Next 7 Days';
+  }
 
   return (
     <Wrapper>
