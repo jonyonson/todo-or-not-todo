@@ -11,10 +11,10 @@ function TodoList(props) {
     todos = props.todos;
     message = 'All Clear!';
   } else if (props.filterBy === 'today') {
-    todos = props.todos.filter(x => moment().isSame(x.date, 'day'));
+    todos = props.todos.filter((x) => moment().isSame(x.date, 'day'));
     message = "You're all done for the day!";
   } else if (props.filterBy === 'week') {
-    todos = props.todos.filter(x =>
+    todos = props.todos.filter((x) =>
       moment(x.date).isSameOrBefore(moment().add(6, 'd'), 'day'),
     );
     message = "You're all done for the week!";

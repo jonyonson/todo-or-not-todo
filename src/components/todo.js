@@ -21,9 +21,9 @@ function Todo() {
     window.localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setTodos(todos =>
+    setTodos((todos) =>
       todos.concat({
         text: input,
         id: generateId(),
@@ -34,18 +34,18 @@ function Todo() {
     setDueDate(() => new Date());
   };
 
-  const removeTodo = id =>
-    setTodos(todos => todos.filter(todo => todo.id !== id));
+  const removeTodo = (id) =>
+    setTodos((todos) => todos.filter((todo) => todo.id !== id));
 
-  const handleDateChange = date => setDueDate(date);
+  const handleDateChange = (date) => setDueDate(date);
 
-  const getCount = filter => {
+  const getCount = (filter) => {
     if (filter === 'all') {
       return todos.length;
     } else if (filter === 'today') {
-      return todos.filter(x => moment().isSame(x.date, 'day')).length;
+      return todos.filter((x) => moment().isSame(x.date, 'day')).length;
     } else if (filter === 'week') {
-      return todos.filter(x =>
+      return todos.filter((x) =>
         moment(x.date).isSameOrBefore(moment().add(6, 'd'), 'day'),
       ).length;
     }
@@ -67,7 +67,7 @@ function Todo() {
           type="text"
           value={input}
           placeholder="New Todo"
-          onChange={e => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
         />
         <button type="sumbit" disabled={!input.length}>
           Add Task
