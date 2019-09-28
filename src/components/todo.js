@@ -39,7 +39,7 @@ function Todo() {
 
   const handleDateChange = (date) => setDueDate(date);
 
-  const getCount = (filter) => {
+  const getTodoCount = (filter) => {
     if (filter === 'all') {
       return todos.length;
     } else if (filter === 'today') {
@@ -51,19 +51,19 @@ function Todo() {
     }
   };
 
-  let title;
+  let todosFilteredBy;
   if (filter === 'all') {
-    title = 'Inbox';
+    todosFilteredBy = 'Inbox';
   } else if (filter === 'today') {
-    title = 'Today';
+    todosFilteredBy = 'Today';
   } else if (filter === 'week') {
-    title = 'Next 7 Days';
+    todosFilteredBy = 'Next 7 Days';
   }
 
   return (
     <Wrapper>
       <Header>
-        <h2>{title}</h2>
+        <h2>{todosFilteredBy}</h2>
         <span>{moment().format('dddd, MMMM D')}</span>
       </Header>
       <Form onSubmit={handleSubmit}>
@@ -88,13 +88,13 @@ function Todo() {
 
       <TabNav>
         <button onClick={() => setFilter('all')}>
-          Inbox <span>{getCount('all')}</span>
+          Inbox <span>{getTodoCount('all')}</span>
         </button>
         <button onClick={() => setFilter('today')}>
-          Today <span>{getCount('today')}</span>
+          Today <span>{getTodoCount('today')}</span>
         </button>
         <button onClick={() => setFilter('week')}>
-          Next 7 Days <span>{getCount('week')}</span>
+          Next 7 Days <span>{getTodoCount('week')}</span>
         </button>
       </TabNav>
 
