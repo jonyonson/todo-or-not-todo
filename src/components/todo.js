@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
-import generateId from '../helpers/generate-id';
+import generateId from '../utils/generate-id';
 import DatePicker from 'react-datepicker';
 import DateButton from './date-button.js';
 import TodoList from './todo-list';
@@ -108,10 +108,15 @@ export default Todo;
 const Wrapper = styled.div`
   max-width: 100%;
   width: 500px;
-  margin: 0 auto;
+  margin: 40px auto;
   border: 1px solid black;
   padding: 30px;
   min-height: 630px;
+
+  @media (max-width: 500px) {
+    margin-top: 0;
+    border: none;
+  }
 `;
 
 const Header = styled.div`

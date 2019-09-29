@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import formatDate from '../helpers/format-date';
+import formatDate from '../utils/format-date';
 import moment from 'moment';
 import { FiTrash2 as Trash } from 'react-icons/fi';
 import complete from '../assets/complete.svg';
