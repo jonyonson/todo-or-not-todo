@@ -5013,7 +5013,7 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-datepicker@^2.8.0:
+react-datepicker@^2.9.6:
   version "2.9.6"
   resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-2.9.6.tgz#26190c9f71692149d0d163398aa19e08626444b1"
   integrity sha512-PLiVhyAr567gWuLMZwIH9WpTIZOZVLhEFyuUzSx3kmQdiikjrYpdNlxsfbbgaxRnee5y08KJZequaqRsNySXmw==
