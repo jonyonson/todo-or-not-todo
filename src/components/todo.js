@@ -159,8 +159,6 @@ const TabNav = styled.div`
     font-size: 14px;
     height: 30px;
     padding: 0 15px 0 5px;
-    /* border: 1px solid black; */
-    /* border-bottom: none; */
     border: none;
     outline: none;
 
@@ -171,15 +169,3 @@ const TabNav = styled.div`
     }
   }
 `;
-
-// const ImageWrapper = styled.div`
-//   width: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-
-//   img {
-//     width: 60%;
-//     margin-bottom: 15px;
-//   }
-// `;
