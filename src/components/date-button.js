@@ -16,4 +16,6 @@ const Button = styled.button`
   font-size: 14px;
   height: 30px;
   margin-top: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background: #fff;
 `;

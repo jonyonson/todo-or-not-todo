@@ -139,12 +139,13 @@ const Form = styled.form`
     padding-left: 5px;
     flex: 1;
     min-width: 100px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
   }
 
   button {
     font-size: 20px;
     background-color: #fff;
-    border: 1px solid black;
+    /* border: 1px solid rgba(0, 0, 0, 0.3); */
     height: 40px;
     padding: 0 10px;
   }
@@ -161,6 +162,7 @@ const TabNav = styled.div`
     padding: 0 15px 0 5px;
     border: none;
     outline: none;
+    background-color: #ffffff;
 
     span {
       font-size: 80%;
